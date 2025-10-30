@@ -19,11 +19,12 @@ export type NoteListResponse = {
 
 axios.defaults.baseURL = 'https://next-docs-9f0504b0a741.herokuapp.com/';
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const getNotes = async () => {
-  await delay(2000);
-  const res = await axios.get<NoteListResponse>('/notes');
+export const getNotes = async (categoryId?: string) => {
+  const res = await axios.get<NoteListResponse>('/notes', {
+    params: { categoryId },
+  });
   return res.data;
 };
 
