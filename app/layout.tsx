@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/components/Header/Header";
-import TanStackProvider from "@/components/TanStackProvider/TanStackProvider.jsx";
+import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,20 +23,28 @@ export const metadata: Metadata = {
 // app/layout.tsx
 
 export default function RootLayout({
-  children
-}: Readonly<{ children: React.ReactNode; }>) {
+  children,
+  modal,
+}: Readonly<{
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <TanStackProvider>
           <Header />
-          <main>{children}</main>
+          <main>
+            {children}
+            {modal}
+          </main>
           <footer>
-            <p>Created <time dateTime="2025">2025</time></p>
+            <p>
+              Created <time dateTime="2025">2025</time>
+            </p>
           </footer>
         </TanStackProvider>
       </body>
     </html>
   );
 }
-
